@@ -19,9 +19,14 @@ async def call_llm(message: str, context: str) -> str:
         model=model,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": f"Pergunta: {message}\n\nContexto:\n{context}"}
-        ]
+            {
+                "role": "user",
+                "content": f"Pergunta: {message}\n\nContexto:\n{context}"
+            }
+        ],
+        temperature=0, 
+        max_tokens=512,
     )
-    
+
     content = response.choices[0].message.content
     return content if content is not None else ""
